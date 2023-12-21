@@ -18,6 +18,7 @@ const RecordingSection: FC = () => {
 
   useEffect(() => {
     if (isRecording) {
+      resetRecording();
       const interval = setInterval(() => {
         setRecordingTime((prev) => {
           const newTime = new Date(prev.getTime() + 1000);
@@ -63,8 +64,16 @@ const RecordingSection: FC = () => {
       return () => clearInterval(interval);
     } else {
       setAudioData(new Uint8Array());
+      setAudioChunks([]);
     }
   }, [isRecording]);
+
+  const resetRecording = () => {
+    setRecordingTime(new Date(0));
+    setAudioChunks([]);
+    setUploadedAudio(null);
+    setSize(0);
+  };
 
   const startRecording = () => {
     setIsRecording(true);
@@ -144,10 +153,7 @@ const RecordingSection: FC = () => {
           <Button
             className="bg-blue-300 hover:bg-blue-400 text-blue-900 rounded-md px-4 py-2 space-x-2"
             onClick={() => {
-              setUploadedAudio(null);
-              setSize(0);
-              setRecordingTime(new Date(0));
-              setAudioChunks([]);
+              resetRecording();
             }}
           >
             <Broom size={18}></Broom>
