@@ -111,7 +111,7 @@ const RecordingSection: FC = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-20">
+    <div className="w-full flex flex-col items-center justify-center mt-10">
       <Button
         onClick={() => {
           if (isRecording) {
@@ -123,15 +123,15 @@ const RecordingSection: FC = () => {
         className="relative mb-12"
       >
         {isRecording ? (
-          <Pause color="#1b2e75" size={60} />
+          <Pause color="#1b2e75" className="w-20 h-20 md:w-16 md:h-16" />
         ) : (
-          <Microphone color="#1b2e75" size={60} />
+          <Microphone color="#1b2e75" className="w-20 h-20 md:w-16 md:h-16" />
         )}
         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
           {isRecording && (
             <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-800 opacity-75" />
           )}
-          <div className="absolute inline-flex rounded-full h-32 w-32 border-4 border-blue-800 hover:bg-purple-600/20" />
+          <div className="absolute inline-flex rounded-full w-44 h-44 md:h-32 md:w-32 border-4 border-blue-800 hover:bg-purple-600/20" />
         </div>
       </Button>
       <AudioWaveForm
@@ -143,35 +143,37 @@ const RecordingSection: FC = () => {
             : AUDIO_WAVE_MIN_WIDTH
         }
         isRecording={isRecording}
-        className="my-4"
+        className="my-8"
       />
-      <div className="text-blue-800 text-center mb-6 text-2xl font-semibold">
+      <div className="text-blue-800 text-center mb-6 text-4xl md:text-2xl font-semibold">
         <span>{moment(recordingTime).format("mm:ss")}</span>
         <span> / </span>
         <span>{size} MB</span>
       </div>
-      {uploadedAudio && (
-        <div className="flex items-center justify-center w-full space-x-4 py-4">
-          <Button
-            className="bg-blue-300 hover:bg-blue-400 text-blue-900 rounded-md px-4 py-2 space-x-2"
-            onClick={() => {
-              resetRecording();
-            }}
-          >
-            <Trash size={18}></Trash>
-            <span>{t("delete")}</span>
-          </Button>
-          <Button
-            className="bg-blue-800 hover:bg-blue-900 text-blue-100 rounded-md px-4 py-2 space-x-2"
-            onClick={() => {
-              saveToFileSystem();
-            }}
-          >
-            <Download size={18}></Download>
-            <span>{t("save")}</span>
-          </Button>
-        </div>
-      )}
+      <div className="h-24">
+        {uploadedAudio && (
+          <div className="flex items-center justify-center w-full space-x-4 py-4">
+            <Button
+              className="bg-blue-300 hover:bg-blue-400 text-blue-900 rounded-md px-4 py-2 space-x-2"
+              onClick={() => {
+                resetRecording();
+              }}
+            >
+              <Trash size={18}></Trash>
+              <span>{t("delete")}</span>
+            </Button>
+            <Button
+              className="bg-blue-800 hover:bg-blue-900 text-blue-100 rounded-md px-4 py-2 space-x-2"
+              onClick={() => {
+                saveToFileSystem();
+              }}
+            >
+              <Download size={18}></Download>
+              <span>{t("save")}</span>
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

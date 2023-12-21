@@ -9,10 +9,14 @@ function App() {
   const { t } = useTranslation();
   return (
     <div className="flex items-center justify-center h-screen w-screen from-purple-300 to-blue-300 bg-gradient-to-b">
-      <div className="h-full w-4/5 md:w-1/2 text-center">
-        <div className="my-10 space-y-4">
-          <h1 className="text-4xl flex items-center justify-center">
-            <img src={favIcon} alt="QuikSave" className="w-10 h-10 mr-1" />
+      <div className="h-full w-4/5 md:w-1/2 text-center flex flex-col items-center justify-center">
+        <div className="mb-20 md:mb-16 space-y-4">
+          <h1 className="text-6xl md:text-4xl flex items-center justify-center">
+            <img
+              src={favIcon}
+              alt="QuikSave"
+              className="h-16 md:w-10 w-16 md:h-10 mr-1"
+            />
             uikSave
           </h1>
           <h2 className="text-lg">
