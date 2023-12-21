@@ -143,16 +143,16 @@ const RecordingSection: FC = () => {
             : AUDIO_WAVE_MIN_WIDTH
         }
         isRecording={isRecording}
-        className="my-8"
+        className="my-5"
       />
       <div className="text-blue-800 text-center mb-6 text-4xl md:text-2xl font-semibold">
         <span>{moment(recordingTime).format("mm:ss")}</span>
         <span> / </span>
         <span>{size} MB</span>
       </div>
-      <div className="h-24">
+      <div className="h-24 md:h-16">
         {uploadedAudio && (
-          <div className="flex items-center justify-center w-full space-x-4 py-4">
+          <div className="flex items-center justify-center w-full space-x-4">
             <Button
               className="bg-blue-300 hover:bg-blue-400 text-blue-900 rounded-md px-4 py-2 space-x-2"
               onClick={() => {
