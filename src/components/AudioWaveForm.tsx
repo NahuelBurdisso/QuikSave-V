@@ -5,6 +5,7 @@ interface AudioWaveFormProps {
   width: number;
   height: number;
   isRecording: boolean;
+  className?: string;
 }
 
 const AudioWaveForm: React.FC<AudioWaveFormProps> = ({
@@ -12,6 +13,7 @@ const AudioWaveForm: React.FC<AudioWaveFormProps> = ({
   width,
   height,
   isRecording,
+  className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -78,7 +80,7 @@ const AudioWaveForm: React.FC<AudioWaveFormProps> = ({
   }, [audioData, width, height, isRecording]);
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className={`flex items-center justify-center w-full ${className}`}>
       <canvas ref={canvasRef} />
     </div>
   );

@@ -91,6 +91,7 @@ const RecordingSection: FC = () => {
     }
   };
 
+  const AUDIO_WAVE_MIN_WIDTH = 500;
   return (
     <div className="w-full flex flex-col items-center justify-center mt-20">
       <Button
@@ -118,8 +119,13 @@ const RecordingSection: FC = () => {
       <AudioWaveForm
         audioData={audioData}
         height={100}
-        width={600}
+        width={
+          window.innerWidth < AUDIO_WAVE_MIN_WIDTH
+            ? window.innerWidth - 40
+            : AUDIO_WAVE_MIN_WIDTH
+        }
         isRecording={isRecording}
+        className="my-4"
       />
       <div className="text-blue-800 text-center mb-6 text-2xl font-semibold">
         <span>{moment(recordingTime).format("mm:ss")}</span>
