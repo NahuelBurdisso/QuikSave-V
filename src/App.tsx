@@ -11,7 +11,7 @@ function App() {
     <div className="flex items-center justify-center h-screen w-screen from-purple-300 to-blue-300 bg-gradient-to-b">
       <div className="h-full w-4/5 md:w-1/2 text-center">
         <div className="my-10 space-y-4">
-          <h1 className="text-3xl flex items-center justify-center">
+          <h1 className="text-4xl flex items-center justify-center">
             <img src={favIcon} alt="QuikSave" className="w-10 h-10 mr-1" />
             uikSave
           </h1>

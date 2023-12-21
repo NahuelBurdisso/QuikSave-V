@@ -1,13 +1,15 @@
-import { Broom, Download, Microphone, Pause } from "@phosphor-icons/react";
+import { Download, Microphone, Pause, Trash } from "@phosphor-icons/react";
 import Button from "./shared/Button";
 import { FC, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import AudioWaveForm from "./AudioWaveForm";
+import { useTranslation } from "react-i18next";
 
 const AUDIO_WAVE_MIN_WIDTH = 500;
 const DATA_ACTUALIZATION_RATE = 1;
 
 const RecordingSection: FC = () => {
+  const { t } = useTranslation();
   const [audioData, setAudioData] = useState<Uint8Array>(new Uint8Array());
   const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
   const [isRecording, setIsRecording] = useState(false);
@@ -156,8 +158,8 @@ const RecordingSection: FC = () => {
               resetRecording();
             }}
           >
-            <Broom size={18}></Broom>
-            <span>Clear</span>
+            <Trash size={18}></Trash>
+            <span>{t("delete")}</span>
           </Button>
           <Button
             className="bg-blue-800 hover:bg-blue-900 text-blue-100 rounded-md px-4 py-2 space-x-2"
@@ -166,7 +168,7 @@ const RecordingSection: FC = () => {
             }}
           >
             <Download size={18}></Download>
-            <span>Save</span>
+            <span>{t("save")}</span>
           </Button>
         </div>
       )}
