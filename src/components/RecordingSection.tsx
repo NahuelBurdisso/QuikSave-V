@@ -4,9 +4,12 @@ import { FC, useEffect, useRef, useState } from "react";
 import moment from "moment";
 import AudioWaveForm from "./AudioWaveForm";
 
+const AUDIO_WAVE_MIN_WIDTH = 500;
 const DATA_ACTUALIZATION_RATE = 1;
+
 const RecordingSection: FC = () => {
   const [audioData, setAudioData] = useState<Uint8Array>(new Uint8Array());
+  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState<Date>(new Date(0));
   const [uploadedAudio, setUploadedAudio] = useState<Blob | null>(null);
@@ -37,6 +40,7 @@ const RecordingSection: FC = () => {
 
           mediaRecorder.current.addEventListener("dataavailable", (event) => {
             audioChunks.push(event.data);
+            setAudioChunks(audioChunks);
 
             // Calculate the total size of all chunks
             const totalSize = audioChunks.reduce(
@@ -74,13 +78,17 @@ const RecordingSection: FC = () => {
       // Stop the media stream
       mediaRecorder.current.stream.getTracks().forEach((track) => {
         track.stop();
-        // get blob from the track media
-        const blob = new Blob([audioData], { type: "audio/wav" });
-        setUploadedAudio(blob);
       });
+
+      // Create a blob from the audio chunks
+      const blob = new Blob(audioChunks, {
+        type: "audio/wav",
+      });
+
+      // Save the blob to the state
+      setUploadedAudio(blob);
     }
   };
-
   const saveToFileSystem = () => {
     if (uploadedAudio) {
       const url = URL.createObjectURL(uploadedAudio);
@@ -91,7 +99,6 @@ const RecordingSection: FC = () => {
     }
   };
 
-  const AUDIO_WAVE_MIN_WIDTH = 500;
   return (
     <div className="w-full flex flex-col items-center justify-center mt-20">
       <Button
@@ -140,6 +147,7 @@ const RecordingSection: FC = () => {
               setUploadedAudio(null);
               setSize(0);
               setRecordingTime(new Date(0));
+              setAudioChunks([]);
             }}
           >
             <Broom size={18}></Broom>
