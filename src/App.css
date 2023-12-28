@@ -1,0 +1,21 @@
+@keyframes raindrop {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.raindrop {
+  position: absolute;
+  animation: raindrop linear infinite;
+  animation-duration: 1s;
+  /* Replace with your icon */
+  background: url("./assets/Lightbulb.svg");
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+}
